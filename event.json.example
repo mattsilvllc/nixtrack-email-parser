@@ -1,0 +1,120 @@
+{
+    "Records": [{
+        "eventVersion": "1.0",
+        "ses": {
+            "mail": {
+                "commonHeaders": {
+                    "from": [
+                        "User Last Name <user@example.com>"
+                    ],
+                    "to": [
+                        "Nutritionix Track App <trackapp@nutritionix.com>"
+                    ],
+                    "returnPath": "user@example.com",
+                    "messageId": "<CAMzWozPv2=dMrAxA+BjWw4RK6n_RA9WqduRDp3bJZVxnJ4F1@mail.example.com>",
+                    "date": "Mon, 17 Oct 2016 16:08:11 +0000",
+                    "subject": "Re: What foods did you eat on Monday, 11-09-16?"
+                },
+                "source": "user@example.com",
+                "timestamp": "2016-10-17T16:08:22.646Z",
+                "destination": [
+                    "trackapp@nutritionix.com"
+                ],
+                "headers": [{
+                    "name": "Return-Path",
+                    "value": "<user@example.com>"
+                }, {
+                    "name": "Received",
+                    "value": "from mail-io0-f169.example.com (mail-io0-f169.example.com [209.85.223.169]) by inbound-smtp.us-east-1.amazonaws.com with SMTP id kie6vn5vv1gfkm1mk57161r9nhejcqm7e11t for trackapp@nutritionix.com; Mon, 17 Oct 2016 16:08:22 +0000 (UTC)"
+                }, {
+                    "name": "X-SES-Spam-Verdict",
+                    "value": "PASS"
+                }, {
+                    "name": "X-SES-Virus-Verdict",
+                    "value": "PASS"
+                }, {
+                    "name": "Received-SPF",
+                    "value": "pass (spfCheck: domain of _spf.example.com designates 209.85.223.169 as permitted sender) client-ip=209.85.223.169; envelope-from=user@example.com; helo=mail-io0-f169.example.com;"
+                }, {
+                    "name": "Authentication-Results",
+                    "value": "amazonses.com; spf=pass (spfCheck: domain of _spf.example.com designates 209.85.223.169 as permitted sender) client-ip=209.85.223.169; envelope-from=user@example.com; helo=mail-io0-f169.example.com; dkim=pass header.i=@example.com;"
+                }, {
+                    "name": "X-SES-RECEIPT",
+                    "value": "AEFBQUFBQUFBQUFGWFJqa3h0aDNtalo4aURZS3JDbkpPL2tQeWVCMnpkb01DYWpFMnNqWlJYQXR4ZE1TU3hPSFk1aVJiZXhSQk1jbGhsVUZJR2lDT1VzTTFDL28vaUFBb0U4UG4vaFZZcDY1OXNnMlhEa1p2MFdmejA3bjFGS0R5a1lYM1FxVkV1MEtXWEhFSjI2YWVONFBHTEp6UzQvWTcyODNmajFZRFRRZGlyWmRVSDZoV293VHArOU5NTmJSR0JnTkgyN2JJQ2tMWGdwKzdMZmpLZ2k3MWFkdTFUc1ZLU2s0bFNFT2VTaTJuYU9sNjM0MDZST2NraDNOTG84SDlzQXpvSXRMM1BBZEpPK29CbzhFeDJoSXl1dDcwMXBkeQ=="
+                }, {
+                    "name": "X-SES-DKIM-SIGNATURE",
+                    "value": "v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=6gbrjpgwjskckoa6a5zn6fwqkn67xbtw; d=amazonses.com; t=1476720491; h=X-SES-RECEIPT:MIME-Version:From:Date:Message-ID:Subject:To:Content-Type; bh=JULcnGYtipawkgO6oylwolkXse1slHc8NbC/GuOb8bU=; b=uLfDlXw0JhA9NGD4h5gGsfYIxY+1KNAO5tKo+bFEPScuVNoURmnkA55BkUPXQTm3 W/7sl8DY4mH+wNBjRBlcES38MS89EA4r7WKU+ObbLMGb1t74oQChHn/ycwZToTfzS2n IheBMkOXhSSEhECSJlbHwZZvFaexW7oHnUUxtA2s="
+                }, {
+                    "name": "Received",
+                    "value": "by mail-io0-f169.example.com with SMTP id f5so10231408ioj.2 for <trackapp@nutritionix.com>; Mon, 17 Oct 2016 09:08:22 -0700 (PDT)"
+                }, {
+                    "name": "DKIM-Signature",
+                    "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=20120113; h=mime-version:references:in-reply-to:from:date:message-id:subject:to; bh=UHW/ZkbtSL4DHiNbjv/ShazQjvDEOKP+gTQPGFHFFRU=; b=r/cgZHyjHruBcX5/818K5pEF2CzLv5rJdmN6E3qzkNk16Z+umyYS+RMABuA67rDAUVwWCMgZmM8YZaTCRBzbxHHYTwfibxzvDIqZKDsr6WlDKLnYu0JWzwiajI1zSdzrpWmHM02FLN0naoLMzswxPmdBgMvN7ujwesfzQFduQDN/H4VFndpDpXhtyHZkaC69Q4H0sO6ir3e98bqs7ipoOU3UfQIvxT+XH0KxCJzwhfECfA18ugKGduD80E7JNBUNcNsA1xIrYfJODAPEvtxd37ea9wTLHlYBFF15iulhPAmMQ3/w8MSogCETRrjhcDAHR/rlU1XslvFsH9trXgubEg=="
+                }, {
+                    "name": "X-Google-DKIM-Signature",
+                    "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20130820; h=x-gm-message-state:mime-version:references:in-reply-to:from:date :message-id:subject:to; bh=UHW/ZkbtSL4DHiNbjv/ShazQjvDEOKP+gTQPGFHFFRU=; b=e5ThLwXtOD82SlD/r0fmCZj5jZtxL+tcZJQDropuJhFp/p3Nr20iYMcuc4h8n0bp4/ N3Ilnmm9FPnLD7JxCKNTXS9LeVpZPLGE7wymHQnooK88tjk9RgR/tuRbHgPqF4zRa8j3 9IICoZMA7CNtf6w79XdH5Tn3Bm9e6xhyOUuljXjutA6F8Slt54w7P09PhUQepYXAZNU+ kbM/gHCX0WdnHumDZ19KziZCqZkktQk06h8YaNAVOk8UYuMtmexvRFxAxJ4DRVvOMUgK 2bKA0kZxjpHSlK4Z+ucXtJnVE7uvZ3kfqY5IBr1sv+b08nUEVMx03ypaLSH13JiA1EQo Ewpw=="
+                }, {
+                    "name": "X-Gm-Message-State",
+                    "value": "AA6/9Rndg/j70qTygKea6fS3aCdnLeMUTUxK/C+z7/eYJ+jkjv9l+7KSHMIEu2CKMNx21oBcC11r11EfqqNn2Q=="
+                }, {
+                    "name": "X-Received",
+                    "value": "by 10.107.18.228 with SMTP id 97mr22629007ios.41.1476720501851; Mon, 17 Oct 2016 09:08:21 -0700 (PDT)"
+                }, {
+                    "name": "MIME-Version",
+                    "value": "1.0"
+                }, {
+                    "name": "References",
+                    "value": "<01000157d362d03f-b4d36f10-5894-48df-aef5-47414a61b30d-000000@email.amazonses.com>"
+                }, {
+                    "name": "In-Reply-To",
+                    "value": "<01000157d362d03f-b4d36f10-5894-48df-aef5-47414a61b30d-000000@email.amazonses.com>"
+                }, {
+                    "name": "From",
+                    "value": "User Last Name <user@example.com>"
+                }, {
+                    "name": "Date",
+                    "value": "Mon, 17 Oct 2016 16:08:11 +0000"
+                }, {
+                    "name": "Message-ID",
+                    "value": "<CAMzWozPv2=dMrAxA+BjWw4RK6n_RA9WqduRDp3bJZVxnJ4F1Gw@mail.example.com>"
+                }, {
+                    "name": "Subject",
+                    "value": "Re: What foods did you eat on Monday, 11-09-16?"
+                }, {
+                    "name": "To",
+                    "value": "Nutritionix Track App <trackapp@nutritionix.com>"
+                }, {
+                    "name": "Content-Type",
+                    "value": "multipart/alternative; boundary=001a113fbb40f20feb053f11c8"
+                }],
+                "headersTruncated": false,
+                "messageId": "kie6vn5vv1gfkm1mk57161r9nhejcqm7e11t"
+            },
+            "receipt": {
+                "recipients": [
+                    "trackapp@nutritionix.com"
+                ],
+                "timestamp": "2016-10-17T16:08:22.646Z",
+                "spamVerdict": {
+                    "status": "PASS"
+                },
+                "dkimVerdict": {
+                    "status": "PASS"
+                },
+                "action": {
+                    "invocationType": "Event",
+                    "type": "Lambda",
+                    "functionArn": "arn:aws:lambda:us-east-1:4610270168:function:ses_incoming_parser"
+                },
+                "processingTimeMillis": 415,
+                "spfVerdict": {
+                    "status": "PASS"
+                },
+                "virusVerdict": {
+                    "status": "PASS"
+                }
+            }
+        },
+        "eventSource": "aws:ses"
+    }]
+}
