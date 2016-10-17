@@ -1,10 +1,13 @@
-### Track E-mail Parser
+### Nutritionix Track E-mail Parser
 AWS Lambda function which parses incoming AWS SES e-mails and hits [Nutritionix Natural API](https://developer.nutritionix.com/docs/v2) endpoint passing the e-mail text body as query, then reply e-mail with a confirmation.
 
 #### Installation
+- Install Dependencies
 ```shell
 pip install -r requirements.txt
 ```
+- Rename or copy `config/production.json.example` to `config/production.json`
+and populate with your credentials and preferences.
 
 #### Build
 This command will generate a file named lambda_src.zip
