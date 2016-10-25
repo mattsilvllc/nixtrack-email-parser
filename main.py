@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 import os
 import sys
 import json
+import re
 import dateutil.parser as dparser
 
 import email
@@ -106,6 +107,26 @@ def nix_natural(text):
     )
 
 
+def nix_log_food(text, email):
+    """ Hit Nutritionix API Natural Endpoint and return the response"""
+    headers = {
+        "x-app-id": NIX_APP_ID,
+        "x-app-key": NIX_APP_KEY
+    }
+
+    return requests.post(
+        os.path.join(BASE_URL, "natural/sse"),
+        data={
+            "query": text,
+        },
+        headers=headers,
+        params={
+            "code": config.get("NIX_API_CODE"),
+            "email": email
+        }
+    )
+
+
 def get_raw_email(_key):
     """ Get raw e-mail from AWS S3 Bucket """
     key = Key(bucket)
@@ -170,17 +191,36 @@ def generate_raw_reply(raw_email, text_body="", html_body=""):
     return new_msg
 
 
+def extract_reply_text(text):
+    re_words = re.compile(r"[0-9a-zA-Z\s\[\]\(\)\{\}\.,\/]+")
+    new_text = text.split('\n')
+
+    new_text = map(lambda x: x.replace('\r', ''), new_text)
+
+    for index, line in enumerate(new_text):
+        if config.get("EMAIL_FROM_NAME") in line or config.get("EMAIL_FROM") in line:
+            new_text = new_text[:index]
+            break
+
+    regex_matches = re_words.findall(new_text[-1])
+    if not regex_matches:
+        new_text.pop()
+
+    new_text = ("\n".join(new_text[:index])).strip()
+
+    return new_text
+
+
 def handler(event, context):
-    print "event: ", json.dumps(event)
     records = event.get("Records")
 
     if records and records[0].get("eventSource") == "aws:ses":
         for record in records:
-            # user_email = record\
-            #     .get("ses")\
-            #     .get("mail")\
-            #     .get("commonHeaders")\
-            #     .get("returnPath")
+            user_email = record\
+                .get("ses")\
+                .get("mail")\
+                .get("commonHeaders")\
+                .get("returnPath")
 
             # timestamp = record\
             #     .get("ses")\
@@ -214,17 +254,21 @@ def handler(event, context):
             message = email.message_from_string(raw_email)
 
             email_text = ""
-            if message.is_multipart():
-                for payload in message.get_payload():
-                    if payload.is_multipart():
-                        pass
-                    else:
-                        email_text = payload.get_payload()
-                        break
-            else:
-                email_text = payload.get_payload()
+            for part in message.walk():
+                if part.get_content_type() == 'text/plain':
+                    payload = part.get_payload()
+                    email_text = extract_reply_text(payload)
+                    break
 
-            api_response_json = json.loads(nix_natural(email_text).text)
+            # Add a date add the end of the e-mail text query
+            email_text = "%s on %s" % (email_text, long_string_date)
+
+            # Log food and store API response
+            api_response_json = json.loads(
+                nix_log_food(email_text,
+                user_email
+                ).text
+            )
 
             # Get total calories
             calories = 0
@@ -240,7 +284,9 @@ def handler(event, context):
                 calories=calories
             )
 
-            reply_msg = generate_raw_reply(raw_email, text_body=reply_text_body)
+            reply_msg = generate_raw_reply(
+                raw_email, text_body=reply_text_body
+            )
 
-            # Send e-mail response
+            # Send e-mail reply
             response = email_client.send_raw_email(str(reply_msg))

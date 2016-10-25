@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
+PROJECT_ROOT_FOLDER="$(pwd)"
 
 # Remove old build
-rm -rf ./lib
-rm lambda_src.zip
+rm -rf ./build
+
+# Copy files
+mkdir build
+
+cp requirements.txt ./build/requirements.txt
+cp main.py ./build
+cp -r ./config ./build
 
 # Install Dependencies
+cd build
 pip install -t lib -r requirements.txt
 
 # Create distribution package
 zip -r \
-      --exclude=build.sh \
-      --exclude=test.sh \
-      --exclude=setup.sh \
-      --exclude=event.json \
-      "--exclude=*.pyc" \
-      "--exclude=.DS_Store" \
-      --exclude=configlocal.json \
-      "--exclude=/venv/*" \
       --exclude=requirements.txt \
-      --exclude=event.json \
-      lambda_src.zip ./
+      dist.zip ./

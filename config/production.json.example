@@ -1,6 +1,7 @@
 {
   "NIX_APP_ID": "<YOUR_APP_ID>",
   "NIX_APP_KEY": "<YOUR_API_KEY>",
+  "NIX_API_CODE": "<SECRET_CODE>",
   "NIX_API_VERSION": "v2",
   "NIX_API_BASE_URL": "https://trackapi.nutritionix.com",
   "AWS_S3_ACCESS_KEY_ID": "<YOUR_AWS_S3_ACCESS_KEY_ID>",
