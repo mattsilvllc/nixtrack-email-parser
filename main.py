@@ -66,9 +66,9 @@ else:
          enviroment variables')
 
 
-# -----------------------
+# ----------------------
 # Nutritionix API Setup
-# -----------------------
+# ----------------------
 API_VERSION = "v2"
 BASE_URL = os.path.join("https://trackapi.nutritionix.com", API_VERSION)
 
@@ -77,9 +77,9 @@ NIX_APP_KEY = config.get("NIX_APP_KEY")
 # End
 
 
-# ---------------------
+# --------------
 # AWS SES Setup
-# ---------------------
+# --------------
 email_client = boto.ses.connect_to_region(
     config.get("AWS_SES_REGION", "us-east-1"),
     aws_access_key_id=config.get("AWS_SES_ACCESS_KEY_ID"),
@@ -164,7 +164,7 @@ def generate_raw_reply(raw_email, text_body="", html_body=""):
             del part["Content-Transfer-Encoding"]
 
     # Create a reply message
-    new_msg = MIMEMultipart("mixed")
+    new_msg = email.mime.multipart.MIMEMultipart()
     body = MIMEMultipart("alternative")
 
     if text_body:
@@ -289,4 +289,4 @@ def handler(event, context):
             )
 
             # Send e-mail reply
-            response = email_client.send_raw_email(str(reply_msg))
+            response = email_client.send_raw_email(reply_msg.as_string())
